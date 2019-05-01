@@ -19,6 +19,7 @@ class FileAttachment:
     """
     Class for file abstraction
     """
+
     name: str
     content: bytes = field(repr=False)
 
