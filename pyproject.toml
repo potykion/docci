@@ -1,9 +1,11 @@
+# https://poetry.eustace.io/docs/pyproject/
 [tool.poetry]
 name = "docci"
 version = "0.1.0"
 description = "Various document utils"
 authors = ["potykion <potykion@gmail.com>"]
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"
