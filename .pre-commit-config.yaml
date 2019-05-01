@@ -21,3 +21,8 @@ repos:
         entry: poetry run flake8 docci tests
         pass_filenames: false
         language: system
+      - id: docstrings
+        name: docstrings
+        entry: poetry run pydocstyle docci
+        pass_filenames: false
+        language: system
