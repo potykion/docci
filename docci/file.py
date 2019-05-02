@@ -1,6 +1,7 @@
 """
-Docci api
+Utils for file manipulations like extracting file name from path
 """
+
 import os
 from dataclasses import dataclass, field
 from typing import Optional
