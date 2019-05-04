@@ -1,6 +1,7 @@
 """
 Utils for file manipulations like extracting file name from path
 """
+import base64
 import io
 import os
 from dataclasses import dataclass, field
@@ -45,6 +46,11 @@ class FileAttachment:
         """Return file attachment content as bytes stream"""
         return io.BytesIO(self.content)
 
+    @property
+    def content_base64(self) -> bytes:
+        """Convert content to base64 binary string"""
+        return base64.b64encode(self.content)
+
     def save(self, path: Optional[str] = None) -> None:
         """
         Save file to disk
@@ -61,3 +67,10 @@ class FileAttachment:
         assert os.path.exists(path), f'No such file: "{path}"'
         with open(path, "rb") as f:
             return FileAttachment(extract_file_name(path), f.read())
+
+    @classmethod
+    def load_from_base64(cls, base64_str: str, name: str) -> 'FileAttachment':
+        """
+        Load file from base64 string
+        """
+        return FileAttachment(name, base64.b64decode(base64_str))
