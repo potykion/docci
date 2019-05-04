@@ -1,7 +1,7 @@
 """
 Utils for file manipulations like extracting file name from path
 """
-
+import io
 import os
 from dataclasses import dataclass, field
 from typing import Optional
@@ -39,6 +39,11 @@ class FileAttachment:
         'py'
         """
         return self.name.rsplit(".", 1)[-1]
+
+    @property
+    def content_stream(self) -> io.BytesIO:
+        """Return file attachment content as bytes stream"""
+        return io.BytesIO(self.content)
 
     def save(self, path: Optional[str] = None) -> None:
         """

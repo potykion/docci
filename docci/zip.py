@@ -21,7 +21,7 @@ def list_zip_files(
             yield FileAttachment(filename, content)
 
     if isinstance(zip_file, FileAttachment):
-        zip_file = ZipFile(io.BytesIO(zip_file.content))
+        zip_file = ZipFile(zip_file.content_stream)
 
     if isinstance(zip_file, (str, io.BytesIO)):
         zip_file = ZipFile(zip_file)
