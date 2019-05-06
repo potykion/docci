@@ -1,5 +1,5 @@
-# https://poetry.eustace.io/docs/pyproject/
 [tool.poetry]
+# https://poetry.eustace.io/docs/pyproject/
 name = "docci"
 version = "0.1.0"
 description = "Various document utils"

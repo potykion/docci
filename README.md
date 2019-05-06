@@ -1,3 +1,3 @@
 # docci
 
-Various document utils
+Various document management utils
