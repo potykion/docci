@@ -6,6 +6,7 @@ description = "Various document utils"
 authors = ["potykion <potykion@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+repository = "https://github.com/potykion/docci"
 
 [tool.poetry.dependencies]
 python = "^3.7"
