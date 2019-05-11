@@ -2,6 +2,17 @@
 
 # Changelog
 
+## [0.3.0] - 2019-05-11
+
+### Added
+
+- docci.file.FileAttachment.name - name without restricted chars like \/:*?"<>|
+- docci.file.FileAttachment.mimetype - mimetype like application/octet-stream from extension
+- docci.file.list_dir_files - return directory name and its files as FileAttachment
+- docci.zip.raw_to_zip - convert path, bytes, stream, FileAttachment to ZipFile
+- docci.zip.zip_files - zip files into single archive
+- docci.zip.zip_dirs - zip directories into single archive
+
 ## [0.2.0] - 2019-05-11
 
 ### Added 
