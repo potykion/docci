@@ -5,7 +5,7 @@ import base64
 import io
 import os
 from dataclasses import dataclass, field
-from typing import Optional, Dict
+from typing import Optional, Dict, Union
 from urllib.parse import urlencode
 
 
@@ -81,7 +81,7 @@ class FileAttachment:
             return FileAttachment(extract_file_name(path), f.read())
 
     @classmethod
-    def load_from_base64(cls, base64_str: str, name: str) -> 'FileAttachment':
+    def load_from_base64(cls, base64_str: Union[str, bytes], name: str) -> 'FileAttachment':
         """
         Load file from base64 string
         """
