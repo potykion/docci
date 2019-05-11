@@ -27,3 +27,14 @@ def list_zip_files(
         zip_file = ZipFile(zip_file)
 
     return list(zip_file_generator(zip_file))
+
+
+def zip_files(zip_name: str, files: Iterable[FileAttachment]) -> FileAttachment:
+    """Zip files to archive with {zip_name}"""
+    stream = io.BytesIO()
+
+    with ZipFile(stream, mode="w") as zf:
+        for file_ in files:
+            zf.writestr(file_.name, file_.content)
+
+    return FileAttachment(zip_name, stream.getvalue())
