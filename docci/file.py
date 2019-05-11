@@ -5,7 +5,8 @@ import base64
 import io
 import os
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Dict
+from urllib.parse import urlencode
 
 
 def extract_file_name(path: str) -> str:
@@ -50,6 +51,17 @@ class FileAttachment:
     def content_base64(self) -> bytes:
         """Convert content to base64 binary string"""
         return base64.b64encode(self.content)
+
+    @property
+    def content_disposition(self) -> Dict[str, str]:
+        """
+        Convert file name to urlencoded Content-Disposition header
+
+        >>> FileAttachment("sample.py", b"").content_disposition
+        {'Content-Disposition': 'attachment; filename=sample.py'}
+        """
+        file_name = urlencode({"filename": self.name})
+        return {"Content-Disposition": f'attachment; {file_name}'}
 
     def save(self, path: Optional[str] = None) -> None:
         """
