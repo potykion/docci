@@ -62,6 +62,18 @@ class FileAttachment:
         file_name = urlencode({"filename": self.name})
         return {"Content-Disposition": f'attachment; {file_name}'}
 
+    @property
+    def mimetype(self) -> str:
+        """
+        Guess mimetype by extension.
+        """
+        if self.extension == "json":
+            return "application/json"
+        if self.extension == "zip":
+            return "application/zip"
+
+        return "application/octet-stream"
+
     def save(self, path: Optional[str] = None) -> None:
         """
         Save file to disk
