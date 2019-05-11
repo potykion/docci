@@ -3,7 +3,17 @@ from operator import attrgetter
 
 from docci.config import TEST_DATA_DIR
 from docci.file import FileAttachment
-from docci.zip import list_zip_files, zip_files
+from docci.zip import list_zip_files, zip_files, raw_to_zip
+
+
+def test_raw_to_zip_convert_bytes_to_zip() -> None:
+    raw_zip = FileAttachment.load(os.path.join(TEST_DATA_DIR, "response.zip")).content
+
+    zip_file = raw_to_zip(raw_zip)
+
+    zip_files = list_zip_files(zip_file)
+    zip_file_names = list(map(attrgetter("name"), zip_files))
+    assert zip_file_names == ["PacketDescription.xml", "2f16e9ce590046abac1fd43479845c17.bin"]
 
 
 def test_list_zip_files_show_zip_content() -> None:
@@ -14,8 +24,8 @@ def test_list_zip_files_show_zip_content() -> None:
 
 def test_list_zip_files_show_zip_content_if_zip_is_inside_of_another_zip() -> None:
     zip_files = list_zip_files(os.path.join(TEST_DATA_DIR, "response.zip"))
-    zip_files_map = dict(zip(map(attrgetter("name"), zip_files), zip_files))
 
+    zip_files_map = dict(zip(map(attrgetter("name"), zip_files), zip_files))
     zip_files = list_zip_files(zip_files_map["2f16e9ce590046abac1fd43479845c17.bin"])
     zip_file_names = list(map(attrgetter("name"), zip_files))
 

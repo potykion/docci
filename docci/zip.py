@@ -7,10 +7,27 @@ from zipfile import ZipFile
 
 from docci.file import FileAttachment
 
+RawZipFile = Union[str, bytes, io.BytesIO, ZipFile, FileAttachment]
 
-def list_zip_files(
-    zip_file: Union[str, io.BytesIO, ZipFile, FileAttachment]
-) -> Sequence[FileAttachment]:
+
+def raw_to_zip(raw_zip_file: RawZipFile) -> ZipFile:
+    """
+    Convert path, bytes, stream, FileAttachment to ZipFile.
+    """
+    if isinstance(raw_zip_file, ZipFile):
+        return raw_zip_file
+
+    if isinstance(raw_zip_file, bytes):
+        return ZipFile(io.BytesIO(raw_zip_file))
+
+    if isinstance(raw_zip_file, FileAttachment):
+        return ZipFile(raw_zip_file.content_stream)
+
+    if isinstance(raw_zip_file, (str, io.BytesIO)):
+        return ZipFile(raw_zip_file)
+
+
+def list_zip_files(raw_zip_file: RawZipFile) -> Sequence[FileAttachment]:
     """
     List zip archive files
     """
@@ -20,11 +37,7 @@ def list_zip_files(
             content = zip_file.read(filename)
             yield FileAttachment(filename, content)
 
-    if isinstance(zip_file, FileAttachment):
-        zip_file = ZipFile(zip_file.content_stream)
-
-    if isinstance(zip_file, (str, io.BytesIO)):
-        zip_file = ZipFile(zip_file)
+    zip_file = raw_to_zip(raw_zip_file)
 
     return list(zip_file_generator(zip_file))
 

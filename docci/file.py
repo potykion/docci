@@ -80,6 +80,9 @@ class FileAttachment:
         with open(path, "rb") as f:
             return FileAttachment(extract_file_name(path), f.read())
 
+    # todo load_from_disk = load
+    # todo from_path = load
+
     @classmethod
     def load_from_base64(cls, base64_str: Union[str, bytes], name: str) -> 'FileAttachment':
         """
