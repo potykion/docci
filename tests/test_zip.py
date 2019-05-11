@@ -2,8 +2,8 @@ import os
 from operator import attrgetter
 
 from docci.config import TEST_DATA_DIR
-from docci.file import FileAttachment
-from docci.zip import list_zip_files, zip_files, raw_to_zip
+from docci.file import FileAttachment, list_dir_files
+from docci.zip import list_zip_files, zip_files, raw_to_zip, zip_dirs
 
 
 def test_raw_to_zip_convert_bytes_to_zip() -> None:
@@ -40,3 +40,9 @@ def test_archive_created_by_zip_files_has_files() -> None:
     archive = zip_files("sample.zip", files)
 
     assert list_zip_files(archive) == files
+
+
+def test_zipped_folder_archive_has_folder_files() -> None:
+    archive = zip_dirs("sample.zip", [list_dir_files(TEST_DATA_DIR)])
+    files = [file.name for file in list_zip_files(archive)]
+    assert files == ["response.zip", "text.txt"]

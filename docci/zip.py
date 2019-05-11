@@ -5,7 +5,7 @@ import io
 from typing import Union, Iterable, Sequence
 from zipfile import ZipFile
 
-from docci.file import FileAttachment
+from docci.file import FileAttachment, Directory
 
 RawZipFile = Union[str, bytes, io.BytesIO, ZipFile, FileAttachment]
 
@@ -47,7 +47,19 @@ def zip_files(zip_name: str, files: Iterable[FileAttachment]) -> FileAttachment:
     stream = io.BytesIO()
 
     with ZipFile(stream, mode="w") as zf:
-        for file_ in files:
-            zf.writestr(file_.name, file_.content)
+        for file in files:
+            zf.writestr(file.name, file.content)
+
+    return FileAttachment(zip_name, stream.getvalue())
+
+
+def zip_dirs(zip_name: str, dirs: Iterable[Directory]) -> FileAttachment:
+    """Zip folders into single zip archive with {zip_name}"""
+    stream = io.BytesIO()
+
+    with ZipFile(stream, mode="w") as zf:
+        for folder_name, folder_files in dirs:
+            for file in folder_files:
+                zf.writestr(f"{folder_name}/{file.name}", file.content)
 
     return FileAttachment(zip_name, stream.getvalue())

@@ -5,16 +5,11 @@ import base64
 import io
 import os
 from dataclasses import dataclass, field
-from typing import Optional, Dict, Union
+from typing import Optional, Dict, Union, Iterable, Tuple
 from urllib.parse import urlencode
 
-
-def extract_file_name(path: str) -> str:
-    """
-    >>> extract_file_name("tests/test_api.py")
-    'test_api.py'
-    """
-    return os.path.basename(path)
+DirectoryName = str
+Directory = Tuple[DirectoryName, Iterable['FileAttachment']]
 
 
 @dataclass
@@ -25,6 +20,10 @@ class FileAttachment:
 
     name: str
     content: bytes = field(repr=False)
+
+    def __post_init__(self) -> None:
+        """Normalize name"""
+        self.name = normalize_name(self.name)
 
     @property
     def name_without_extension(self) -> str:
@@ -80,12 +79,41 @@ class FileAttachment:
         with open(path, "rb") as f:
             return FileAttachment(extract_file_name(path), f.read())
 
-    # todo load_from_disk = load
-    # todo from_path = load
-
     @classmethod
     def load_from_base64(cls, base64_str: Union[str, bytes], name: str) -> 'FileAttachment':
         """
         Load file from base64 string
         """
         return FileAttachment(name, base64.b64decode(base64_str))
+
+
+def extract_file_name(path: str) -> str:
+    """
+    Extract file name from path, works to directories too
+    >>> extract_file_name("tests/test_api.py")
+    'test_api.py'
+    >>> extract_file_name("tests/test")
+    'test'
+    """
+    return os.path.basename(path)
+
+
+def normalize_name(raw_name: str) -> str:
+    """
+    Extract file name, remove restricted chars
+
+    >>> normalize_name('op/"oppa".txt')
+    'oppa.txt'
+    """
+    name = extract_file_name(raw_name)
+    for restricted in r'\/:*?"<>|':
+        name = name.replace(restricted, "")
+    return name
+
+
+def list_dir_files(directory: str) -> Directory:
+    """List directory files, return Directory"""
+    paths = os.listdir(directory)
+    full_paths = [os.path.join(directory, path) for path in paths]
+    files = [FileAttachment.load(path) for path in full_paths if os.path.isfile(path)]
+    return extract_file_name(directory), files

@@ -1,7 +1,7 @@
 import os
 
-from docci.config import TEST_DATA_DIR
-from docci.file import extract_file_name, FileAttachment
+from docci.config import TEST_DATA_DIR, BASE_DIR
+from docci.file import extract_file_name, FileAttachment, list_dir_files
 
 
 def test_file_attachment_load_sets_name_and_has_contest() -> None:
@@ -28,3 +28,10 @@ def test_file_attachment_creation_from_base64() -> None:
     file_ = FileAttachment.load_from_base64(base64_str, "text.txt")
     expected_file = FileAttachment.load(os.path.join(TEST_DATA_DIR, "text.txt"))
     assert file_ == expected_file
+
+
+def test_list_dir_files_for_current_dir_has_this_file() -> None:
+    tests = "tests"
+    directory_name, files = list_dir_files(os.path.join(BASE_DIR, tests))
+    assert directory_name == tests
+    assert extract_file_name(__file__) in [file.name for file in files]
