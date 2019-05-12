@@ -2,6 +2,12 @@
 
 # Changelog
 
+## [0.3.1] - 2019-05-13
+
+### Fixed 
+
+- docci.file.FileAttachment.content_disposition - percent encoding instead of plus encoding 
+
 ## [0.3.0] - 2019-05-11
 
 ### Added

@@ -4,7 +4,13 @@ Various document management utils
 
 ## Publish
 
-To publish package:
+Bump version:
+
+```
+poetry version major/minor/patch
+```
+
+Build and publish package:
 
 ```
 poetry publish --build
