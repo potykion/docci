@@ -65,6 +65,11 @@ class FileAttachment:
         return {"Content-Disposition": f'attachment; {file_name}'}
 
     @property
+    def content_json(self) -> Dict:
+        """Return content as dict with base64 content"""
+        return {"file": self.content_base64.decode("utf-8")}
+
+    @property
     def mimetype(self) -> str:
         """
         Guess mimetype by extension.
