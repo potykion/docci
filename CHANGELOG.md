@@ -2,6 +2,12 @@
 
 # Changelog
 
+## [0.4.0] - 2019-05-13
+
+### Added 
+
+- docci.file.FileAttachment.content_json - return content as dict with content base64 
+
 ## [0.3.1] - 2019-05-13
 
 ### Fixed 
