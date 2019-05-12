@@ -6,7 +6,7 @@ import io
 import os
 from dataclasses import dataclass, field
 from typing import Optional, Dict, Union, Iterable, Tuple
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 DirectoryName = str
 Directory = Tuple[DirectoryName, Iterable['FileAttachment']]
@@ -58,8 +58,10 @@ class FileAttachment:
 
         >>> FileAttachment("sample.py", b"").content_disposition
         {'Content-Disposition': 'attachment; filename=sample.py'}
+        >>> FileAttachment("98 - February 2019.zip", b"").content_disposition
+        {'Content-Disposition': 'attachment; filename=98%20-%20February%202019.zip'}
         """
-        file_name = urlencode({"filename": self.name})
+        file_name = urlencode({"filename": self.name}, quote_via=quote)
         return {"Content-Disposition": f'attachment; {file_name}'}
 
     @property
