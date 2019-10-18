@@ -2,6 +2,13 @@
 
 # Changelog
 
+## Unreleased - 2019-10-18
+
+### Added
+
+- docci.xlsx.xlsx_to_bytes - Convert openpyxl.Workbook to bytes (#1)
+- docci.xlsx.xlsx_to_file - Convert openpyxl.Workbook to FileAttachment (#2)
+
 ## [0.4.0] - 2019-05-13
 
 ### Added 
