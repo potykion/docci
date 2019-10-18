@@ -8,6 +8,7 @@
 
 - docci.xlsx.xlsx_to_bytes - Convert openpyxl.Workbook to bytes (#1)
 - docci.xlsx.xlsx_to_file - Convert openpyxl.Workbook to FileAttachment (#2)
+- docci.file.normalize_name:with_file_name_extract - If false don't extract file name from raw name (#3)
 
 ## [0.4.0] - 2019-05-13
 

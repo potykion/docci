@@ -117,14 +117,16 @@ def extract_file_name(path: str) -> str:
     return os.path.basename(path)
 
 
-def normalize_name(raw_name: str) -> str:
+def normalize_name(raw_name: str, with_file_name_extract: bool = True) -> str:
     """
     Extract file name, remove restricted chars
 
     >>> normalize_name('op/"oppa".txt')
     'oppa.txt'
+    >>> normalize_name('op/"oppa".txt', with_file_name_extract=False)
+    'opoppa.txt'
     """
-    name = extract_file_name(raw_name)
+    name = extract_file_name(raw_name) if with_file_name_extract else raw_name
     for restricted in r'\/:*?"<>|':
         name = name.replace(restricted, "")
     return name
