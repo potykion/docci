@@ -2,7 +2,7 @@
 
 # Changelog
 
-## Unreleased - 2019-10-18
+## 0.5.0 - 2019-10-18
 
 ### Added
 
