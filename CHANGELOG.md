@@ -2,7 +2,7 @@
 
 # Changelog
 
-## Unreleased - 2019-12-22
+## 0.6.0 - 2019-12-22
 
 ### Added 
 
