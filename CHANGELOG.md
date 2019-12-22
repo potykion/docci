@@ -2,6 +2,12 @@
 
 # Changelog
 
+## Unreleased - 2019-12-22
+
+### Added 
+
+- docci.xlsx.dicts_to_xlsx - Create openpyxl.Workbook with rows of {dicts} values.
+
 ## 0.5.0 - 2019-10-18
 
 ### Added
