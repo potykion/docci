@@ -109,6 +109,7 @@ class FileAttachment:
 def extract_file_name(path: str) -> str:
     """
     Extract file name from path, works to directories too
+
     >>> extract_file_name("tests/test_api.py")
     'test_api.py'
     >>> extract_file_name("tests/test")
