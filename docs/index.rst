@@ -59,7 +59,7 @@ Firstly, you need to create FileAttachment:
  # Creation from base64 str
  from docci.file import FileAttachment
 
- file = FileAttachment.load_from_base64("base64-string")
+ file = FileAttachment.load_from_base64("base64-string", "filename")
 
 Now you can use the FileAttachment features:
 
@@ -103,7 +103,7 @@ Specific file utilities are just functions:
  from openpyxl import load_workbook
  from docci.xlsx import xlsx_to_file
 
- xlsx_file = xlsx_to_file(load_workbook("path/to/xlsx"))
+ xlsx_file = xlsx_to_file(load_workbook("path/to/xlsx"), "filename.xlsx")
 
  # To create xlsx from dicts
  from docci.xlsx import dicts_to_xlsx
