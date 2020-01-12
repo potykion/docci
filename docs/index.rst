@@ -137,3 +137,22 @@ docci.zip
    :members:
 
 
+Development & contribution
+**************************
+
+Publishing to PYPI
+------------------
+
+Bump version:
+
+.. code-block:: bash
+
+ poetry version major/minor/patch
+
+Build and publish package:
+
+.. code-block:: bash
+
+ poetry publish --build
+
+Published package can be found here: https://pypi.org/project/docci/
