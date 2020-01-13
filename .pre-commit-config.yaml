@@ -26,3 +26,8 @@ repos:
         entry: poetry run pydocstyle docci
         pass_filenames: false
         language: system
+      - id: requirements
+        name: requirements
+        entry: poetry export --dev --without-hashes -f requirements.txt > requirements.txt
+        pass_filenames: false
+        language: system
