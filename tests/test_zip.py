@@ -37,12 +37,12 @@ def test_archive_created_by_zip_files_has_files() -> None:
     files = [
         FileAttachment.load(os.path.join(TEST_DATA_DIR, file_name)) for file_name in file_names
     ]
-    archive = zip_files("sample.zip", files)
+    archive = zip_files(files, "sample.zip")
 
     assert list_zip_files(archive) == files
 
 
 def test_zipped_folder_archive_has_folder_files() -> None:
-    archive = zip_dirs("sample.zip", [list_dir_files(TEST_DATA_DIR)])
+    archive = zip_dirs([list_dir_files(TEST_DATA_DIR)], "sample.zip")
     files = [file.name for file in list_zip_files(archive)]
     assert files == ["response.zip", "text.txt"]

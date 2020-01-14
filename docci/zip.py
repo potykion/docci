@@ -42,7 +42,7 @@ def list_zip_files(raw_zip_file: RawZipFile) -> Sequence[FileAttachment]:
     return list(zip_file_generator(zip_file))
 
 
-def zip_files(zip_name: str, files: Iterable[FileAttachment]) -> FileAttachment:
+def zip_files(files: Iterable[FileAttachment], zip_name: str) -> FileAttachment:
     """Zip files to archive with {zip_name}"""
     stream = io.BytesIO()
 
@@ -53,7 +53,7 @@ def zip_files(zip_name: str, files: Iterable[FileAttachment]) -> FileAttachment:
     return FileAttachment(zip_name, stream.getvalue())
 
 
-def zip_dirs(zip_name: str, dirs: Iterable[Directory]) -> FileAttachment:
+def zip_dirs(dirs: Iterable[Directory], zip_name: str) -> FileAttachment:
     """Zip folders into single zip archive with {zip_name}"""
     stream = io.BytesIO()
 
