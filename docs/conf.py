@@ -12,6 +12,7 @@
 #
 import os
 import sys
+# Enable docci automodules
 sys.path.insert(0, os.path.abspath('../'))
 
 

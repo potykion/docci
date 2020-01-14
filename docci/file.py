@@ -134,7 +134,7 @@ def normalize_name(raw_name: str, with_file_name_extract: bool = True) -> str:
 
 
 def list_dir_files(directory: str) -> Directory:
-    """List directory files, return Directory"""
+    """List directory files, return Directory - tuple of dir name and list of dir files"""
     paths = os.listdir(directory)
     full_paths = [os.path.join(directory, path) for path in paths]
     files = [FileAttachment.load(path) for path in full_paths if os.path.isfile(path)]
