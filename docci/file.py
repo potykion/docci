@@ -16,6 +16,11 @@ Directory = Tuple[DirectoryName, Iterable['FileAttachment']]
 class FileAttachment:
     """
     Class for file abstraction
+
+    :param name: file name.
+        Restricted symbols (like ``*/:``) and
+        directory path (``/opt/data/test.txt`` > ``test.txt``) will be removed from the file name.
+    :param content: binary file content
     """
 
     name: str

@@ -29,6 +29,7 @@ def xlsx_to_bytes(xlsx: Workbook) -> bytes:
 def dicts_to_xlsx(dicts: Sequence[Dict], headers: Sequence[str] = None) -> Workbook:
     """
     Create openpyxl.Workbook with rows of {dicts} values.
+
     :param dicts: List of dicts to insert
     :param headers: List of headers if None dict keys would be used.
     :return: openpyxl.Workbook
