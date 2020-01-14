@@ -2,6 +2,16 @@
 
 # Changelog
 
+## Unreleased - 2020-01-14
+
+### Added
+
+- **Sphinx Documentation** - https://docci.readthedocs.io/en/latest/ 
+
+### Changed 
+
+- docci.zip.zip_files, docci.zip.zip_dirs - reorder params
+
 ## 0.6.0 - 2019-12-22
 
 ### Added 
