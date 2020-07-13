@@ -5,7 +5,7 @@ Utils for working with openpyxl.Workbook
 from io import BytesIO
 from typing import Sequence, Dict
 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 
 from docci.file import FileAttachment
 
@@ -44,3 +44,13 @@ def dicts_to_xlsx(dicts: Sequence[Dict], headers: Sequence[str] = None) -> Workb
         sheet.append(tuple(dict_.values()))
 
     return xlsx
+
+
+def xlsx_from_bytes(bytes_: bytes) -> Workbook:
+    """Create xlsx from bytes."""
+    return load_workbook(BytesIO(bytes_))
+
+
+def xlsx_from_file(file: FileAttachment) -> Workbook:
+    """Create xlsx from FileAttachment"""
+    return xlsx_from_bytes(file.content)

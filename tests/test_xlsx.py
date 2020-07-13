@@ -3,7 +3,7 @@ import io
 import pytest
 from openpyxl import Workbook, load_workbook
 
-from docci.xlsx import xlsx_to_bytes, xlsx_to_file, dicts_to_xlsx
+from docci.xlsx import xlsx_to_bytes, xlsx_to_file, dicts_to_xlsx, xlsx_from_bytes, xlsx_from_file
 
 
 @pytest.fixture()
@@ -42,3 +42,15 @@ def test_dicts_to_xlsx_with_custom_headers() -> None:
         ("val1", "val2"),
         ("val3", "val4"),
     )
+
+
+def test_xlsx_from_bytes(xlsx: Workbook) -> None:
+    actual_xlsx = xlsx_from_bytes(xlsx_to_bytes(xlsx))
+
+    assert tuple(actual_xlsx.active.values) == tuple(xlsx.active.values)
+
+
+def test_xlsx_from_file(xlsx: Workbook) -> None:
+    actual_xlsx = xlsx_from_file(xlsx_to_file(xlsx, "sam.xlsx"))
+
+    assert tuple(actual_xlsx.active.values) == tuple(xlsx.active.values)
