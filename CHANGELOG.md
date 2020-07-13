@@ -1,8 +1,15 @@
-<!-- https://keepachangelog.com/en/## 1.1.0/ -->
+<!-- https://keepachangelog.com/en/1.0.0/ -->
 
 # Changelog
 
-## ## 1.1.0 - 2020-01-14
+## 1.1.0 - 2020-07-13
+
+### Added
+
+- docci.xlsx.xlsx_from_bytes, docci.xlsx.xlsx_from_file - create xlsx from bytes/files (#6) 
+
+
+## 1.0.0 - 2020-01-14
 
 ### Added
 
